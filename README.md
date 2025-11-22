@@ -58,26 +58,6 @@ This means **zero latency** (after load), **zero data leakage**, and **zero API 
 4. Open your browser at `http://localhost:3000/`.
    *Note: The first time you run an AI task, the model (~2GB) will be downloaded and cached in your browser.*
 
-## Docker & Deployment
-
-This project includes a multi-stage `Dockerfile` optimized for production with Nginx.
-
-### Build & Run Locally
-```bash
-docker build -t human-feel-write .
-docker run -p 8080:8080 human-feel-write
-```
-
-### Deploy to Google Cloud Run
-```bash
-gcloud run deploy human-feel-write \
-  --source . \
-  --region europe-west1 \
-  --memory 512Mi \
-  --cpu 1 \
-  --allow-unauthenticated
-```
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
