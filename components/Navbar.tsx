@@ -31,7 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleTheme }) => {
               <div className="bg-indigo-600 p-2 rounded-lg">
                 <BrainCircuit className="h-6 w-6 text-white" />
               </div>
-              <span className="font-bold text-xl text-slate-800 dark:text-white tracking-tight">Humanize<span className="text-indigo-600 dark:text-indigo-400">AI</span></span>
+              <span className="font-bold text-xl text-slate-800 dark:text-white tracking-tight">Priv<span className="text-indigo-600 dark:text-indigo-400">AI</span></span>
             </Link>
             <div className="hidden sm:ml-10 sm:flex sm:space-x-8">
               <Link to="/" className={navLinkClass('/')}>
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleTheme }) => {
               Local Mode: Secure
             </div>
             <a
-              href="https://github.com/HenryLok0/Humanize-Web"
+              href="https://github.com/HenryLok0/PrivAI"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"

@@ -1,15 +1,15 @@
-# Humanize-Web (HumanizeAI)
+# PrivAI
 
-[![Code Size](https://img.shields.io/github/languages/code-size/HenryLok0/Humanize-Web?style=flat-square&logo=github)](https://github.com/HenryLok0/Humanize-Web)
+[![Code Size](https://img.shields.io/github/languages/code-size/HenryLok0/PrivAI?style=flat-square&logo=github)](https://github.com/HenryLok0/PrivAI)
 
-[![MIT License](https://img.shields.io/github/license/HenryLok0/Humanize-Web?style=flat-square)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/HenryLok0/Humanize-Web?style=flat-square)](https://github.com/HenryLok0/Humanize-Web/stargazers)
+[![MIT License](https://img.shields.io/github/license/HenryLok0/PrivAI?style=flat-square)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/HenryLok0/PrivAI?style=flat-square)](https://github.com/HenryLok0/PrivAI/stargazers)
 
 ---
 
 ## Overview
 
-**Humanize-Web** is a privacy-focused writing tool that brings the power of Large Language Models (LLMs) directly to your browser. Unlike other AI tools that send your data to the cloud, Humanize-Web runs a **Llama-3.2-3B** model entirely on your device using WebGPU.
+**PrivAI** is a privacy-focused writing tool that brings the power of Large Language Models (LLMs) directly to your browser. Unlike other AI tools that send your data to the cloud, PrivAI runs a **Llama-3.2-3B** model entirely on your device using WebGPU.
 
 This means **zero latency** (after load), **zero data leakage**, and **zero API costs**.
 
@@ -39,8 +39,8 @@ This means **zero latency** (after load), **zero data leakage**, and **zero API 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/HenryLok0/Humanize-Web.git
-   cd Humanize-Web
+   git clone https://github.com/HenryLok0/PrivAI.git
+   cd PrivAI
    ```
 
 2. Install dependencies:

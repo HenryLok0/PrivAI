@@ -41,7 +41,7 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <footer className="py-6 text-center text-slate-400 dark:text-slate-600 text-sm">
-          <p>© {new Date().getFullYear()} HumanizeAI. Local Processing. No Data Sent.</p>
+          <p>© {new Date().getFullYear()} PrivAI. Local Processing. No Data Sent.</p>
         </footer>
       </div>
     </Router>
