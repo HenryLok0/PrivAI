@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HumanizationLevel, WritingMode, LengthMode, EmotionIntensity } from '../types';
 import { getStats } from '../services/textProcessingService';
 import { initLLM, generateHumanizedText, LLMStatus } from '../services/llmService';
+import { SUPPORTED_LANGUAGES } from '../constants/languages';
 import { Wand2, Copy, Check, Trash2, RefreshCw, ArrowRight, BrainCircuit } from 'lucide-react';
 import { diffWords } from 'diff';
 
@@ -12,6 +13,8 @@ const HumanizePage: React.FC = () => {
   const [mode, setMode] = useState<WritingMode>(WritingMode.General);
   const [lengthMode, setLengthMode] = useState<LengthMode>(LengthMode.Original);
   const [emotionIntensity, setEmotionIntensity] = useState<EmotionIntensity>(EmotionIntensity.Neutral);
+  const [essayMode, setEssayMode] = useState(false);
+  const [targetLanguage, setTargetLanguage] = useState("Original");
   const [isProcessing, setIsProcessing] = useState(false);
   const [progress, setProgress] = useState(0);
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -61,6 +64,8 @@ const HumanizePage: React.FC = () => {
         mode, 
         lengthMode, 
         emotionIntensity,
+        essayMode,
+        targetLanguage,
         (p) => setProgress(p)
       );
       setOutputText(result);
@@ -221,6 +226,42 @@ const HumanizePage: React.FC = () => {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* Essay Mode Toggle */}
+              <div className="flex-1 flex flex-col justify-end">
+                 <div className="flex items-center justify-between bg-slate-100 dark:bg-slate-700 p-2.5 rounded-lg h-[42px]">
+                    <label className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer select-none" onClick={() => setEssayMode(!essayMode)}>
+                        Essay Mode (Research & Facts)
+                    </label>
+                    <button
+                      onClick={() => setEssayMode(!essayMode)}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ${
+                        essayMode ? 'bg-indigo-600' : 'bg-slate-300 dark:bg-slate-500'
+                      }`}
+                    >
+                      <span
+                        className={`${
+                          essayMode ? 'translate-x-6' : 'translate-x-1'
+                        } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                      />
+                    </button>
+                 </div>
+              </div>
+
+              {/* Output Language Selector */}
+              <div className="flex-1">
+                <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mb-2 tracking-wider">Output Language</label>
+                <select
+                  value={targetLanguage}
+                  onChange={(e) => setTargetLanguage(e.target.value)}
+                  className="w-full p-2.5 rounded-lg bg-slate-100 dark:bg-slate-700 border-none text-sm font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all"
+                >
+                  <option value="Original">Same as Input (Default)</option>
+                  {SUPPORTED_LANGUAGES.map((lang) => (
+                    <option key={lang} value={lang}>{lang}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>

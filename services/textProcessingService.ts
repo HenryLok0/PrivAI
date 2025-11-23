@@ -124,8 +124,11 @@ const SPECIFIC_SUGGESTIONS: Record<string, string> = {
 // Helper to count stats
 export const getStats = (text: string) => {
   const chars = text.length;
-  const words = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
-  const sentences = text.trim() === '' ? 0 : text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+  const cjkCount = (text.match(/[\u4e00-\u9fa5]/g) || []).length;
+  const nonCjkText = text.replace(/[\u4e00-\u9fa5]/g, ' ');
+  const spaceSeparatedCount = nonCjkText.trim() === '' ? 0 : nonCjkText.trim().split(/\s+/).length;
+  const words = cjkCount + spaceSeparatedCount;
+  const sentences = text.split(/[.!?。！？]+/).filter(s => s.trim().length > 0).length;
   return { chars, words, sentences };
 };
 

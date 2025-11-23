@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { analyzeText, getStats } from '../services/textProcessingService';
+import { analyzeTextWithLLM, initLLM } from '../services/llmService';
 import { AnalysisResult } from '../types';
 import { AlertTriangle, Search, ShieldCheck, BarChart3, Zap } from 'lucide-react';
 
@@ -8,19 +8,28 @@ const AnalyzePage: React.FC = () => {
     const [text, setText] = useState('');
     const [result, setResult] = useState<AnalysisResult | null>(null);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // Simple debounce or effect if we wanted real-time, but button press is better for heavy logic
-    }, [text]);
+        // Initialize LLM if not already
+        initLLM((status) => console.log(status)).catch(console.error);
+    }, []);
 
-    const handleAnalyze = () => {
+    const handleAnalyze = async () => {
         if (!text.trim()) return;
         setIsAnalyzing(true);
-        setTimeout(() => {
-            const res = analyzeText(text);
+        setError(null);
+        setResult(null);
+        
+        try {
+            const res = await analyzeTextWithLLM(text);
             setResult(res);
+        } catch (err) {
+            console.error(err);
+            setError("Failed to analyze text. Please ensure the AI model is loaded.");
+        } finally {
             setIsAnalyzing(false);
-        }, 600);
+        }
     };
 
     // Chart Data Preparation
@@ -61,9 +70,14 @@ const AnalyzePage: React.FC = () => {
                                     }`}
                             >
                                 {isAnalyzing ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : <Search className="w-5 h-5" />}
-                                Analyze Content
+                                {isAnalyzing ? 'Analyzing...' : 'Analyze Content'}
                             </button>
                         </div>
+                        {error && (
+                            <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm rounded-lg border border-red-100 dark:border-red-900/30">
+                                {error}
+                            </div>
+                        )}
                     </div>
                 </div>
 
